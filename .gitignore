@@ -1,0 +1,32 @@
+Open sidebar
+class App:
+    def __init__(self, master):
+        self.master = master
+        self.button = tk.Button(master, text="Press Me", command=self.on_button_press)
+        self.button.pack()
+        self.count = 0
+
+    def on_button_press(self):
+        self.count += 1
+        tk.Label(self.master, text=f"Button pressed {self.count} times").pack()
+        self.draw_tree()
+
+    def draw_tree(self):
+        # You can use the tkinter Canvas widget to draw a tree on the screen
+        canvas = tk.Canvas(self.master, width=200, height=100)
+        canvas.pack()
+
+        # Use the create_rectangle method to draw a rectangle for the trunk of the tree
+        x1 = 60
+        y1 = 20
+        x2 = 100
+        y2 = 80
+        canvas.create_rectangle(x1, y1, x2, y2, fill="brown")
+
+        # Use the create_polygon method to draw a triangle for the canopy of the tree
+        points = [x1, y2, x2, y2, (x1 + x2) / 2, y2 - 50]
+        canvas.create_polygon(points, fill="green", outline="green")
+
+root = tk.Tk()
+app = App(root)
+root.mainloop()
